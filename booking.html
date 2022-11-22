@@ -1,0 +1,1981 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/vendors.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <title>GoTrip</title>
+</head>
+<style>
+  /* @extend display-flex; */
+display-flex, .steps ul, .title-number, .actions ul, .actions ul li a {
+  display: flex;
+  display: -webkit-flex; }
+
+/* @extend list-type-ulli; */
+list-type-ulli, .steps ul, .actions ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+a:focus, a:active {
+  text-decoration: none;
+  outline: none;
+  transition: all 300ms ease 0s;
+  -moz-transition: all 300ms ease 0s;
+  -webkit-transition: all 300ms ease 0s;
+  -o-transition: all 300ms ease 0s;
+  -ms-transition: all 300ms ease 0s; }
+
+input, select, textarea {
+  outline: none;
+  appearance: unset !important;
+  -moz-appearance: unset !important;
+  -webkit-appearance: unset !important;
+  -o-appearance: unset !important;
+  -ms-appearance: unset !important; }
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  appearance: none !important;
+  -moz-appearance: none !important;
+  -webkit-appearance: none !important;
+  -o-appearance: none !important;
+  -ms-appearance: none !important;
+  margin: 0; }
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -o-box-shadow: none !important;
+  -ms-box-shadow: none !important; }
+
+input[type=checkbox] {
+  appearance: checkbox !important;
+  -moz-appearance: checkbox !important;
+  -webkit-appearance: checkbox !important;
+  -o-appearance: checkbox !important;
+  -ms-appearance: checkbox !important; }
+
+input[type=radio] {
+  appearance: radio !important;
+  -moz-appearance: radio !important;
+  -webkit-appearance: radio !important;
+  -o-appearance: radio !important;
+  -ms-appearance: radio !important; }
+
+.clear {
+  clear: both; }
+
+h3 {
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer; }
+
+h2 {
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0px;
+  padding-top: 32px;
+  padding-bottom: 25px; }
+
+
+fieldset {
+  border: none;
+  margin: 0px;
+  padding: 0px; }
+
+fieldset.current {
+  padding-left: 42px;
+  padding-right: 37px; }
+
+.content {
+  
+ 
+  margin: 0 auto;
+  border: 1px solid lightgray;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  box-shadow: 0px 5px 9.5px 0.5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 5px 9.5px 0.5px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 5px 9.5px 0.5px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0px 5px 9.5px 0.5px rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: 0px 5px 9.5px 0.5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px; }
+  .content h3 {
+    display: none; }
+
+.steps {
+  padding-bottom: 20px; }
+  .steps ul {
+    justify-content: space-between;
+    -moz-justify-content: space-between;
+    -webkit-justify-content: space-between;
+    -o-justify-content: space-between;
+    -ms-justify-content: space-between;
+    position: relative; }
+    .steps ul:after {
+      position: absolute;
+      content: "";
+      height: 3px;
+      width: 85%;
+      left: 50%;
+      transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      -o-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      background: black;
+      z-index: 9;
+      bottom: 60px; }
+    .steps ul li {
+      position: relative;
+      z-index: 99; }
+      .steps ul li a {
+        text-decoration: none;
+        color: #fff; }
+    .steps ul .current .title-number {
+      font-size: 16px;
+      color: #fff;
+      background-image: -moz-linear-gradient(0deg, #a1c4fd 0%, #884d80 0%, #2b5876 0%, #4e4376 100%);
+      background-image: -webkit-linear-gradient(0deg, #a1c4fd 0%, #884d80 0%, #2b5876 0%, #4e4376 100%);
+      background-image: -ms-linear-gradient(0deg, #a1c4fd 0%, #884d80 0%, #2b5876 0%, #4e4376 100%); }
+
+.title span {
+  text-align: center; }
+
+.title-text {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 10px;
+color:black;}
+
+.title-number {
+  font-size: 13px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -o-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border: 3px solid #fff;
+  background: #ebebeb;
+  color: #999999;
+  align-items: center;
+  -moz-align-items: center;
+  -webkit-align-items: center;
+  -o-align-items: center;
+  -ms-align-items: center;
+  justify-content: center;
+  -moz-justify-content: center;
+  -webkit-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  margin: 0 auto;
+  box-shadow: 0px 5px 9.5px 0.5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 5px 9.5px 0.5px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0px 5px 9.5px 0.5px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: 0px 5px 9.5px 0.5px rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: 0px 5px 9.5px 0.5px rgba(0, 0, 0, 0.2); }
+
+.actions {
+  
+  bottom: 40px;
+  right: 0;
+  margin-top:20px;
+  width: 100%; }
+  .actions ul {
+    width: 100%;
+    align-items: center;
+    -moz-align-items: center;
+    -webkit-align-items: center;
+    -o-align-items: center;
+    -ms-align-items: center;
+    justify-content: center;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
+    -o-justify-content: center;
+    -ms-justify-content: center; }
+    .actions ul .disabled {
+      display: none; }
+    .actions ul li {
+      margin: 0 5px; }
+      .actions ul li a {
+        width: 120px;
+        height: 40px;
+        color: #fff;
+        background-color: #222;
+        background-image: -moz-linear-gradient(0deg, #a1c4fd 0%, #884d80 0%, #2b5876 0%, #4e4376 100%);
+        background-image: -webkit-linear-gradient(0deg, #a1c4fd 0%, #884d80 0%, #2b5876 0%, #4e4376 100%);
+        background-image: -ms-linear-gradient(0deg, #a1c4fd 0%, #884d80 0%, #2b5876 0%, #4e4376 100%);
+        align-items: center;
+        -moz-align-items: center;
+        -webkit-align-items: center;
+        -o-align-items: center;
+        -ms-align-items: center;
+        justify-content: center;
+        -moz-justify-content: center;
+        -webkit-justify-content: center;
+        -o-justify-content: center;
+        -ms-justify-content: center;
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -o-border-radius: 5px;
+        -ms-border-radius: 5px;
+        text-decoration: none; }
+        .actions ul li a:hover {
+          background-color: #090909; }
+
+.form-group {
+  padding-bottom: 20px;
+  position: relative; }
+
+@media screen and (max-width: 480px) {
+  .container {
+    width: calc(100% - 40px);
+    max-width: 100%; }
+
+  .content {
+    width: 100%; }
+
+  fieldset.current {
+    padding-left: 20px;
+    padding-right: 20px; }
+
+  .actions ul li a {
+    width: 100px; } }
+@media screen and (max-width: 400px) {
+  .steps ul:after {
+    width: 230px; }
+
+  .title-text {
+    padding: 0 10px; } }
+
+/*# sourceMappingURL=style.css.map */
+
+
+.fetchone{  
+  width: 100%;
+  padding: 20px;
+  display: block;
+  border-width: 2px;
+  position: relative;
+  text-align: center;
+  border-style: solid;
+}
+.fetchone::after{z-index:2;width:1px;content:"";height:35px;bottom:-35px;position:absolute}
+.fetchtwo{  
+  width: 100%;
+  padding: 20px;
+  margin-top: 20px;;
+  display: block;
+  border-width: 2px;
+  position: relative;
+  text-align: center;
+  border-style: solid;
+}
+span {cursor:pointer; }
+		
+		.minus, .plus{
+			width:40px;
+			height:40px;
+      background-color: var(--color-dark-1) !important;
+			border-radius:4px;
+			padding:4px 5px 8px 5px;
+			border:1px solid #ddd;
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+      color: white;
+		}
+		.inputCounter{
+			height:34px;
+      width: 100px !important;
+      background-color: white !important;
+      text-align: center;
+      font-size: 26px;
+			border:1px solid #ddd;
+			border-radius:4px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+</style>
+<body>
+  <div class="preloader js-preloader">
+    <div class="preloader__wrap">
+      <div class="preloader__icon">
+        <svg width="38" height="37" viewBox="0 0 38 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_1_41)">
+            <path d="M32.9675 13.9422C32.9675 6.25436 26.7129 0 19.0251 0C11.3372 0 5.08289 6.25436 5.08289 13.9422C5.08289 17.1322 7.32025 21.6568 11.7327 27.3906C13.0538 29.1071 14.3656 30.6662 15.4621 31.9166V35.8212C15.4621 36.4279 15.9539 36.92 16.561 36.92H21.4895C22.0965 36.92 22.5883 36.4279 22.5883 35.8212V31.9166C23.6849 30.6662 24.9966 29.1071 26.3177 27.3906C30.7302 21.6568 32.9675 17.1322 32.9675 13.9422V13.9422ZM30.7699 13.9422C30.7699 16.9956 27.9286 21.6204 24.8175 25.7245H23.4375C25.1039 20.7174 25.9484 16.7575 25.9484 13.9422C25.9484 10.3587 25.3079 6.97207 24.1445 4.40684C23.9229 3.91841 23.6857 3.46886 23.4347 3.05761C27.732 4.80457 30.7699 9.02494 30.7699 13.9422ZM20.3906 34.7224H17.6598V32.5991H20.3906V34.7224ZM21.0007 30.4014H17.0587C16.4167 29.6679 15.7024 28.8305 14.9602 27.9224H16.1398C16.1429 27.9224 16.146 27.9227 16.1489 27.9227C16.152 27.9227 23.0902 27.9224 23.0902 27.9224C22.3725 28.8049 21.6658 29.6398 21.0007 30.4014ZM19.0251 2.19765C20.1084 2.19765 21.2447 3.33365 22.1429 5.3144C23.1798 7.60078 23.7508 10.6649 23.7508 13.9422C23.7508 16.6099 22.8415 20.6748 21.1185 25.7245H16.9322C15.2086 20.6743 14.2994 16.6108 14.2994 13.9422C14.2994 10.6649 14.8706 7.60078 15.9075 5.3144C16.8057 3.33365 17.942 2.19765 19.0251 2.19765V2.19765ZM7.28053 13.9422C7.28053 9.02494 10.3184 4.80457 14.6157 3.05761C14.3647 3.46886 14.1273 3.91841 13.9059 4.40684C12.7425 6.97207 12.102 10.3587 12.102 13.9422C12.102 16.7584 12.9462 20.7176 14.6126 25.7245H13.2259C9.33565 20.6126 7.28053 16.5429 7.28053 13.9422Z" fill="#3554D1" />
+          </g>
+
+          <defs>
+            <clipPath id="clip0_1_41">
+              <rect width="36.92" height="36.92" fill="white" transform="translate(0.540039)" />
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <div class="preloader__title">GoTrip</div>
+  </div>
+
+  <main>
+
+
+    <div class="header-margin"></div>
+    <header data-add-bg="-header-5-sticky" class="header -type-5 js-header" data-x="header" data-x-toggle="is-menu-opened">
+      <div data-anim="fade" class="header__container container">
+        <div class="row justify-between items-center">
+
+          <div class="col-auto">
+            <div class="d-flex items-center">
+              <div class="mr-20">
+                <button class="d-flex items-center icon-menu text-dark-1 text-20" data-x-click="desktopMenu"></button>
+              </div>
+
+              <a href="index.html" class="header-logo mr-20" data-x="header-logo" data-x-toggle="is-logo-dark">
+                <img src="img/general/logo-dark.svg" alt="logo icon">
+                <img src="img/general/logo-dark.svg" alt="logo icon">
+              </a>
+
+
+              <div class="header-menu " data-x="mobile-menu" data-x-toggle="is-menu-active">
+                <div class="mobile-overlay"></div>
+
+                <div class="header-menu__content">
+                  <div class="mobile-bg js-mobile-bg"></div>
+
+                  <div class="menu js-navList">
+                    <ul class="menu__nav text-dark-1 -is-active">
+                      <li>
+                        <a href="index.html">
+                           Home
+                        </a>
+                      </li>
+                      <li >
+                        <a data-barba href="booking.html">
+                          <span class="mr-10">Reservar</span>
+                        </a>
+                      </li>
+                      <li >
+                        <a data-barba href="">
+                          <span class="mr-10">Empresa</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="contact.html">Contactar</a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="mobile-footer px-20 py-20 border-top-light js-mobile-footer">
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="desktopMenu js-desktopMenu" data-x="desktopMenu" data-x-toggle="is-menu-active">
+                <div class="desktopMenu-overlay"></div>
+
+                <div class="desktopMenu__content">
+                  <div class="mobile-bg js-mobile-bg"></div>
+
+                  <div class="px-30 py-20 sm:px-20 sm:py-10 border-bottom-light">
+                    <div class="row justify-between items-center">
+                      <div class="col-auto">
+                        <div class="text-20 fw-500">Main Menu</div>
+                      </div>
+
+                      <div class="col-auto">
+                        <button class="icon-close text-15" data-x-click="desktopMenu"></button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="h-full px-30 py-30 sm:px-0 sm:py-10">
+                    <div class="menu js-navList">
+                      <ul class="menu__nav  -is-active">
+
+                        <li class="menu-item-has-children">
+                          <a data-barba href="">
+                            <span class="mr-10">Home</span>
+                            <i class="icon icon-chevron-sm-down"></i>
+                          </a>
+
+                          <ul class="subnav">
+                            <li class="subnav__backBtn js-nav-list-back">
+                              <a href="#"><i class="icon icon-chevron-sm-down"></i> Home</a>
+                            </li>
+
+                            <li><a href="index.html">Home 1</a></li>
+
+                            <li><a href="home-2.html">Home 2</a></li>
+
+                            <li><a href="home-3.html">Home 3</a></li>
+
+                            <li><a href="home-4.html">Home 4</a></li>
+
+                            <li><a href="home-5.html">Home 5</a></li>
+
+                            <li><a href="home-6.html">Home 6</a></li>
+
+                            <li><a href="home-7.html">Home 7</a></li>
+
+                            <li><a href="home-8.html">Home 8</a></li>
+
+                            <li><a href="home-9.html">Home 9</a></li>
+
+                            <li><a href="home-10.html">Home 10</a></li>
+
+                          </ul>
+
+                        </li>
+
+
+                        <li class="menu-item-has-children -has-mega-menu">
+                          <a data-barba href="#">
+                            <span class="mr-10">Categories</span>
+                            <i class="icon icon-chevron-sm-down"></i>
+                          </a>
+
+                          <ul class="subnav mega-mobile">
+                            <li class="subnav__backBtn js-nav-list-back">
+                              <a href="#"><i class="icon icon-chevron-sm-down"></i> Category</a>
+                            </li>
+
+                            <li class="menu-item-has-children">
+                              <a data-barba href="#">
+                                <span class="mr-10">Hotel</span>
+                                <i class="icon icon-chevron-sm-down"></i>
+                              </a>
+
+                              <ul class="subnav">
+                                <li class="subnav__backBtn js-nav-list-back">
+                                  <a href="#"><i class="icon icon-chevron-sm-down"></i> Hotel</a>
+                                </li>
+
+
+                                <li><a href="hotel-list-1.html">Hotel List v1</a></li>
+
+                                <li><a href="hotel-list-2.html">Hotel List v2</a></li>
+
+                                <li><a href="hotel-single-1.html">Hotel Single v1</a></li>
+
+                                <li><a href="hotel-single-2.html">Hotel Single v2</a></li>
+
+                                <li><a href="booking-pages.html">Booking Page</a></li>
+
+                              </ul>
+                            </li>
+
+                            <li class="menu-item-has-children">
+                              <a data-barba href="#">
+                                <span class="mr-10">Tour</span>
+                                <i class="icon icon-chevron-sm-down"></i>
+                              </a>
+
+                              <ul class="subnav">
+                                <li class="subnav__backBtn js-nav-list-back">
+                                  <a href="#"><i class="icon icon-chevron-sm-down"></i> Tour</a>
+                                </li>
+
+                                <li><a href="tour-list-1.html">Tour List v1</a></li>
+
+                                <li><a href="tour-grid-1.html">Tour List v2</a></li>
+
+                                <li><a href="tour-map.html">Tour Map</a></li>
+
+                                <li><a href="tour-single.html">Tour Single</a></li>
+
+                              </ul>
+                            </li>
+
+                            <li class="menu-item-has-children">
+                              <a data-barba href="#">
+                                <span class="mr-10">Activity</span>
+                                <i class="icon icon-chevron-sm-down"></i>
+                              </a>
+
+                              <ul class="subnav">
+                                <li class="subnav__backBtn js-nav-list-back">
+                                  <a href="#"><i class="icon icon-chevron-sm-down"></i> Activity</a>
+                                </li>
+
+                                <li><a href="activity-list-1.html">Activity List v1</a></li>
+
+                                <li><a href="activity-grid-1.html">Activity List v2</a></li>
+
+                                <li><a href="activity-map.html">Activity Map</a></li>
+
+                                <li><a href="activity-single.html">Activity Single</a></li>
+
+                              </ul>
+                            </li>
+
+                            <li class="menu-item-has-children">
+                              <a data-barba href="#">
+                                <span class="mr-10">Rental</span>
+                                <i class="icon icon-chevron-sm-down"></i>
+                              </a>
+
+                              <ul class="subnav">
+                                <li class="subnav__backBtn js-nav-list-back">
+                                  <a href="#"><i class="icon icon-chevron-sm-down"></i> Rental</a>
+                                </li>
+
+                                <li><a href="rental-list-1.html">Rental List v1</a></li>
+
+                                <li><a href="rental-grid-1.html">Rental List v2</a></li>
+
+                                <li><a href="rental-map.html">Rental Map</a></li>
+
+                                <li><a href="rental-single.html">Rental Single</a></li>
+
+                              </ul>
+                            </li>
+
+                            <li class="menu-item-has-children">
+                              <a data-barba href="#">
+                                <span class="mr-10">Car</span>
+                                <i class="icon icon-chevron-sm-down"></i>
+                              </a>
+
+                              <ul class="subnav">
+                                <li class="subnav__backBtn js-nav-list-back">
+                                  <a href="#"><i class="icon icon-chevron-sm-down"></i> Car</a>
+                                </li>
+
+                                <li><a href="car-list-1.html">Car List v1</a></li>
+
+                                <li><a href="car-grid-1.html">Car List v2</a></li>
+
+                                <li><a href="car-map.html">Car Map</a></li>
+
+                                <li><a href="car-single.html">Car Single</a></li>
+
+                              </ul>
+                            </li>
+
+                            <li class="menu-item-has-children">
+                              <a data-barba href="#">
+                                <span class="mr-10">Cruise</span>
+                                <i class="icon icon-chevron-sm-down"></i>
+                              </a>
+
+                              <ul class="subnav">
+                                <li class="subnav__backBtn js-nav-list-back">
+                                  <a href="#"><i class="icon icon-chevron-sm-down"></i> Cruise</a>
+                                </li>
+
+                                <li><a href="cruise-list-1.html">Cruise List v1</a></li>
+
+                                <li><a href="cruise-grid-1.html">Cruise List v2</a></li>
+
+                                <li><a href="cruise-map.html">Cruise Map</a></li>
+
+                                <li><a href="cruise-single.html">Cruise Single</a></li>
+
+                              </ul>
+                            </li>
+
+                            <li class="menu-item-has-children">
+                              <a data-barba href="#">
+                                <span class="mr-10">Flights</span>
+                                <i class="icon icon-chevron-sm-down"></i>
+                              </a>
+
+                              <ul class="subnav">
+                                <li class="subnav__backBtn js-nav-list-back">
+                                  <a href="#"><i class="icon icon-chevron-sm-down"></i> Flights</a>
+                                </li>
+
+                                <li><a href="flights-list.html">Flights List v1</a></li>
+
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+
+                        <li>
+                          <a href="destinations.html">
+                            Destinations
+                          </a>
+                        </li>
+
+
+                        <li class="menu-item-has-children">
+                          <a data-barba href="">
+                            <span class="mr-10">Blog</span>
+                            <i class="icon icon-chevron-sm-down"></i>
+                          </a>
+
+                          <ul class="subnav">
+                            <li class="subnav__backBtn js-nav-list-back">
+                              <a href="#"><i class="icon icon-chevron-sm-down"></i> Blog</a>
+                            </li>
+
+                            <li><a href="blog-list-1.html">Blog list v1</a></li>
+
+                            <li><a href="blog-list-2.html">Blog list v2</a></li>
+
+                            <li><a href="blog-single.html">Blog single</a></li>
+
+                          </ul>
+
+                        </li>
+
+
+                        <li class="menu-item-has-children">
+                          <a data-barba href="">
+                            <span class="mr-10">Pages</span>
+                            <i class="icon icon-chevron-sm-down"></i>
+                          </a>
+
+                          <ul class="subnav">
+                            <li class="subnav__backBtn js-nav-list-back">
+                              <a href="#"><i class="icon icon-chevron-sm-down"></i> Pages</a>
+                            </li>
+
+                            <li><a href="404.html">404</a></li>
+
+                            <li><a href="about.html">About</a></li>
+
+                            <li><a href="become-expert.html">Become expert</a></li>
+
+                            <li><a href="help-center.html">Help center</a></li>
+
+                            <li><a href="login.html">Login</a></li>
+
+                            <li><a href="signup.html">Register</a></li>
+
+                            <li><a href="terms.html">Terms</a></li>
+
+                            <li><a href="invoice.html">Invoice</a></li>
+
+                            <li><a href="ui-elements.html">UI elements</a></li>
+
+                          </ul>
+
+                        </li>
+
+
+                        <li class="menu-item-has-children">
+                          <a data-barba href="">
+                            <span class="mr-10">Dashboard</span>
+                            <i class="icon icon-chevron-sm-down"></i>
+                          </a>
+
+                          <ul class="subnav">
+                            <li class="subnav__backBtn js-nav-list-back">
+                              <a href="#"><i class="icon icon-chevron-sm-down"></i> Dashboard</a>
+                            </li>
+
+                            <li><a href="db-dashboard.html">Dashboard</a></li>
+
+                            <li><a href="db-booking.html">Booking</a></li>
+
+                            <li><a href="db-settings.html">Settings</a></li>
+
+                            <li><a href="db-wishlist.html">Wishlist</a></li>
+
+                            <li><a href="db-vendor-dashboard.html">Vendor dashboard</a></li>
+
+                            <li><a href="db-vendor-add-hotel.html">Vendor add hotel</a></li>
+
+                            <li><a href="db-vendor-booking.html">Vendor booking</a></li>
+
+                            <li><a href="db-vendor-hotels.html">Vendor hotels</a></li>
+
+                            <li><a href="db-vendor-recovery.html">Vendor recovery</a></li>
+
+                          </ul>
+
+                        </li>
+
+
+                        <li>
+                          <a href="contact.html">Contact</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="col-auto">
+            <div class="d-flex items-center">
+              <div class="header__buttons d-flex items-center is-menu-opened-hide">
+                <a href="become-expert.html" class="button h-50 px-30 fw-400 text-14 -blue-1 bg-white text-dark-1 sm:d-none">Reservar</a>
+              </div>
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </header>
+    <section class="masthead -type-2 js-mouse-move-container animated pb-20">
+      <div class="masthead__bg bg-dark-3" style="height:100%;">
+        <img src="img/masthead/2/bg.png" alt="image">
+      </div>
+      <div class="container bg-white pt-30">
+        <div class="col-md-12 p-5">
+          <h1 class="text-center mt-20">Aparcamiento aeropuerto de Barcelona</h1>
+          <form method="POST" id="signup-form" class="signup-form" enctype="multipart/form-data">
+            <h3>
+                Seleccionar fecha
+            </h3>
+            <fieldset>
+              <div class="row">
+                <div class="col-md-2">                  
+                  <div class="form-input ">
+                    <input type="text" required="" id="datepicker">
+                    <label class="lh-1 text-12 text-light-1">FECHA DE ENTRADA</label>
+                  </div>
+                </div>
+                <div class="col-md-2">                  
+                  <div class="form-input ">
+                    <input type="text" required="" class="timepicker">
+                    <label class="lh-1 text-12 text-light-1">HORA DE ENTRADA</label>
+                  </div>
+                </div>
+                  
+                <div class="col-md-2">
+                  <div class="form-input ">
+                    <input type="text" required=""  id="datepicker1">
+                    <label class="lh-1 text-12 text-light-1">FECHA DE SALIDA</label>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-input ">
+                    <input type="text" required="" class="timepicker">
+                    <label class="lh-1 text-12 text-light-1">HORA DE SALIDA</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-input ">
+                    <select name="" id="">
+                      <option value=""></option>
+                      <option value="">Option</option>
+                      <option value="">Option</option>
+                    </select>
+                    <label class="lh-1 text-12 text-light-1">AEROPUERTO</label>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+  
+            <h3>
+              Tipo de aparcamiento
+            </h3>
+            <fieldset>
+              <div class="row y-gap-30">
+                <div class="col-xl-3 col-lg-4 lg:d-none" style="border: 1px solid lightgray;height:100%;">
+                  <aside class="sidebar y-gap-40">
+                    
+      
+                    <div class="sidebar__item -no-border">
+                      <h5 class="text-18 fw-500 mb-10">Fechas</h5>
+                      <div class="cpbs-rental-date-box">
+                        <div class="fetchone">
+                          <span>Fecha de entrada</span>
+                          <span>19-10-2022, 7:00</span>
+                        </div>
+                        <div class="fetchtwo">
+                          <span>Fecha de salida</span>
+                          <span>26-10-2022, 7:00</span>
+                        </div>
+                      </div>
+                    </div>
+      
+                    <div class="sidebar__item">
+                      <h5 class="text-18 fw-500 mb-10">Número de dias</h5>
+                      <div class="sidebar-checkbox">      
+                        <div class="row y-gap-10 items-center justify-between">                          
+                          <div class="col-auto">
+                            <div class="text-15 text-light-1">7 dias</div>
+                          </div>
+                        </div>      
+                      </div>
+                    </div>
+      
+      
+                    <div class="sidebar__item">
+                      <h5 class="text-18 fw-500 mb-10">Resumen</h5>
+                      <div class="sidebar-checkbox">
+      
+                        <div class="row y-gap-10 items-center justify-between">
+                          <div class="col-auto">      
+                            <div class="d-flex items-center">
+                              <div class="text-15 ml-10">Plaza</div>
+                            </div>      
+                          </div>      
+                          <div class="col-auto">
+                            <div class="text-15 text-light-1">$92</div>
+                          </div>
+                        </div>
+                        <div class="row y-gap-10 items-center justify-between">
+                          <div class="col-auto">      
+                            <div class="d-flex items-center">
+                              <div class="text-15 ml-10">Extras</div>
+                            </div>      
+                          </div>      
+                          <div class="col-auto">
+                            <div class="text-15 text-light-1">$92</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+      
+                    <div class="sidebar__item">                      
+                      <div class="sidebar-checkbox">      
+                        <div class="row y-gap-10 items-center justify-between">
+                          <div class="col-auto">      
+                            <div class="d-flex items-center">                         
+                                <div class="text-20 ml-10">Total</div>      
+                            </div>      
+                          </div>      
+                          <div class="col-auto">
+                            <div class="text-20 b text-black-1">$92</div>
+                          </div>
+                        </div>      
+                      </div>
+                    </div>      
+                  </aside>
+                </div>
+      
+                <div class="col-xl-9 col-lg-8">
+                  <div class="row y-gap-10 items-center justify-between">
+                    <div class="col-auto">
+                      <div class="text-18"><span class="fw-500">Tipo de aparcamiento</span><br />1 Tipos de vehículos disponibles
+                     </div>
+                    </div>
+                  </div>
+      
+             
+                  <div class="mt-30"></div>
+      
+                  <div class="row y-gap-30  pb-30">
+      
+                    <div class="col-12">
+      
+                      <div class="border-top-light pt-30" style="background: #f0f2f8;">
+                        <div class="row x-gap-20 y-gap-20">
+                          <div class="col-md-auto">
+                            <div class="relative d-flex">
+      
+                              <div class="cardImage ratio ratio-1:1 w-200 md:w-1/1 rounded-4">
+                                <div class="cardImage__content">
+      
+                                  <img class="rounded-4 col-12 js-lazy loaded" src="img/lists/car/1/1.png" alt="image" data-ll-status="loaded">
+      
+      
+                                </div>
+      
+                                <div class="cardImage__wishlist">
+                                  <button class="button -blue-1 bg-white size-30 rounded-full shadow-2">
+                                    <i class="icon-heart text-12"></i>
+                                  </button>
+                                </div>
+      
+      
+                              </div>
+      
+      
+                              <div class="absolute h-full col-12 d-flex items-end px-10 py-15">
+                                <img src="img/lists/car/1/badge.png" alt="image">
+                              </div>
+                            </div>
+                          </div>
+      
+                          <div class="col-md">
+                            <div class="d-flex flex-column justify-between">
+                              <div class="">
+                               <h4 class="text-18 lh-16 fw-500 mt-5">
+                                  Coche
+                                </h4>
+                              </div>
+      
+                              <div class="col-lg-7 mt-20">
+                                <div class="row y-gap-5">      
+                                  <div class="col-sm-12">
+                                    <div class="d-flex items-center">
+                                      <div class="text-14 ml-10">Aeropuerto el Prat  <a href="" style="text-decoration: underline;">Más detalles</a></div>
+                                    </div>
+                                  </div>      
+                                </div>
+                              </div>
+                              <div class="row mt-20">
+                                <div class="col-md-6">
+                                  <div class="d-flex items-center">
+                                    <i class="icon-check text-10"></i>
+                                    <div class="text-14 fw-500 ml-10">TIPO DE APARCAMIENTO <br />2.5x6 m</div>
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="d-flex items-center mt-5">
+                                    <i class="icon-check text-10"></i>
+                                    <div class="text-14 fw-500 text-green-2 ml-10">PLAZAS DISPONIBLES <br />186 de 200 disponibles</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+      
+                          <div class="col-md-auto text-right md:text-left">
+                            
+                            <div class="text-22 lh-12 fw-600 mt-70 md:mt-20">US$72</div>
+                            
+                              <a href="#" class="button h-50 px-24 bg-dark-1 -yellow-1 text-white mt-24">
+                              Seleccionar 
+                            </a>
+      
+                          </div>
+                        </div>
+                      </div>
+      
+                    </div>
+                    <div class="col-md-12">
+                      <h2 class="text-left text-18">Completa tu reserva con estos extras</h2>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="row ml-10 mr-10 p-4" style="background: #f0f2f8;">
+                        
+                          <div class="col-md-6">
+                            <div class="" style="display:inline-block ;">Rellenar Liquido limpiapabrisas</div>
+                            <div class="text-right"><strong>+€7.00 por todo el período</strong></div>
+                            <p class="">Rellenamos tu líquido limpiaparabrisas.</p>
+                          </div>
+                          <div class="col-md-6">
+                            
+                            <div class="cpbs-header cpbs-header-style-4 cpbs-booking-extra-price">
+                              <div class="number">
+                              <span class="minus">-</span>
+                              <input type="text" value="1" class="inputCounter"/>
+                              <span class="plus">+</span>
+                            </div></div>
+                            <a href="#" class="button h-50 px-24 bg-dark-1 -yellow-1 text-white mt-24">
+                              Seleccionar 
+                            </a>
+                          </div>
+                        
+                      </div>
+                      
+      
+                    </div>
+      
+      
+                  </div>
+      
+                </div>
+              </div>  
+               
+            </fieldset>
+  
+            <h3>
+              Detalles del cliente
+            </h3>
+            <fieldset> 
+              <div class="row y-gap-30">
+                <div class="col-xl-3 col-lg-4 lg:d-none" style="border: 1px solid lightgray;height:100%;">
+                  <aside class="sidebar y-gap-40">
+                    
+      
+                    <div class="sidebar__item -no-border">
+                      <h5 class="text-18 fw-500 mb-10">Fechas</h5>
+                      <div class="cpbs-rental-date-box">
+                        <div class="fetchone">
+                          <span>Fecha de entrada</span>
+                          <span>19-10-2022, 7:00</span>
+                        </div>
+                        <div class="fetchtwo">
+                          <span>Fecha de salida</span>
+                          <span>26-10-2022, 7:00</span>
+                        </div>
+                      </div>
+                    </div>
+      
+                    <div class="sidebar__item">
+                      <h5 class="text-18 fw-500 mb-10">Número de dias</h5>
+                      <div class="sidebar-checkbox">      
+                        <div class="row y-gap-10 items-center justify-between">                          
+                          <div class="col-auto">
+                            <div class="text-15 text-light-1">7 dias</div>
+                          </div>
+                        </div>      
+                      </div>
+                    </div>
+      
+      
+                    <div class="sidebar__item">
+                      <h5 class="text-18 fw-500 mb-10">Resumen</h5>
+                      <div class="sidebar-checkbox">
+      
+                        <div class="row y-gap-10 items-center justify-between">
+                          <div class="col-auto">      
+                            <div class="d-flex items-center">
+                              <div class="text-15 ml-10">Plaza</div>
+                            </div>      
+                          </div>      
+                          <div class="col-auto">
+                            <div class="text-15 text-light-1">$92</div>
+                          </div>
+                        </div>
+                        <div class="row y-gap-10 items-center justify-between">
+                          <div class="col-auto">      
+                            <div class="d-flex items-center">
+                              <div class="text-15 ml-10">Extras</div>
+                            </div>      
+                          </div>      
+                          <div class="col-auto">
+                            <div class="text-15 text-light-1">$92</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+      
+                    <div class="sidebar__item">                      
+                      <div class="sidebar-checkbox">      
+                        <div class="row y-gap-10 items-center justify-between">
+                          <div class="col-auto">      
+                            <div class="d-flex items-center">                         
+                                <div class="text-20 ml-10">Total</div>      
+                            </div>      
+                          </div>      
+                          <div class="col-auto">
+                            <div class="text-20 b text-black-1">$92</div>
+                          </div>
+                        </div>      
+                      </div>
+                    </div>      
+                  </aside>
+                </div>
+      
+                <div class="col-xl-9 col-lg-8">
+                  <div class="row y-gap-10 items-center justify-between">
+                    <div class="col-auto">
+                      <div class="text-18"><span class="fw-500">Detalles del cliente</span></div>
+                    </div>
+                  </div>
+      
+      
+                  <div class="mt-30"></div>
+      
+                  <div class="row y-gap-30 pb-20">
+                    <div class="col-md-6">                      
+                      <div class="form-input ">
+                        <input type="text" required="">
+                        <label class="lh-1 text-16 text-light-1">NOMBRE *</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-input ">
+                        <input type="text" required="">
+                        <label class="lh-1 text-16 text-light-1">APELLIDO *</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-input ">
+                        <input type="text" required="">
+                        <label class="lh-1 text-16 text-light-1">DIRECCIÓN DE CORREO ELECTRÓNICO *</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-input ">
+                        <input type="text" required="">
+                        <label class="lh-1 text-16 text-light-1">NÚMERO DE TELÉFONO *</label>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-input ">
+                        <textarea required="" rows="4"></textarea>
+                        <label class="lh-1 text-16 text-light-1">COMENTARIOS</label>
+                      </div>
+          
+                    </div>
+                  </div>
+                  <div class="border-top-light pt-30">
+                    <h6>VUELO</h6>
+                    <div class="row y-gap-30">
+                      <div class="col-md-12">                      
+                        <div class="form-input ">
+                          <input type="text" required="">
+                          <label class="lh-1 text-16 text-light-1">NÚMERO DE IDA</label>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-input ">
+                          <input type="text" required="">
+                          <label class="lh-1 text-16 text-light-1">NÚMERO DE VUELTA</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="border-top-light pt-30">
+                    <h6>INFORMACIÓN DEL VEHÍCULO</h6>
+                    <div class="row y-gap-30">
+                      <div class="col-md-12">                      
+                        <div class="form-input ">
+                          <input type="text" required="">
+                          <label class="lh-1 text-16 text-light-1">MODELO DEL COCHE</label>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-input ">
+                          <input type="text" required="">
+                          <label class="lh-1 text-16 text-light-1">MATRÍCULA</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </fieldset>
+
+            <h3>
+              Resumen de la reserva
+            </h3>
+            <fieldset> 
+              <div class="row">
+                <div class="col-md-5 mx-auto">
+                  <div class="border-light rounded-8 px-50 py-40 mt-40">
+                    <h4 class="text-20 fw-500 mb-30">Detalles del cliente</h4>
+      
+                    <div class="row y-gap-10">
+      
+                      <div class="col-12">
+                        <div class="d-flex justify-between ">
+                          <div class="text-15 lh-16">First name</div>
+                          <div class="text-15 lh-16 fw-500 text-blue-1">System</div>
+                        </div>
+                      </div>
+      
+                      <div class="col-12">
+                        <div class="d-flex justify-between border-top-light pt-10">
+                          <div class="text-15 lh-16">Last name</div>
+                          <div class="text-15 lh-16 fw-500 text-blue-1">Admin</div>
+                        </div>
+                      </div>
+      
+                      <div class="col-12">
+                        <div class="d-flex justify-between border-top-light pt-10">
+                          <div class="text-15 lh-16">Email</div>
+                          <div class="text-15 lh-16 fw-500 text-blue-1">admin@bookingcore.test</div>
+                        </div>
+                      </div>
+      
+                      <div class="col-12">
+                        <div class="d-flex justify-between border-top-light pt-10">
+                          <div class="text-15 lh-16">Phone</div>
+                          <div class="text-15 lh-16 fw-500 text-blue-1">112 666 888</div>
+                        </div>
+                      </div>
+      
+                      <div class="col-12">
+                        <div class="d-flex justify-between border-top-light pt-10">
+                          <div class="text-15 lh-16">Address line 1</div>
+                          <div class="text-15 lh-16 fw-500 text-blue-1"></div>
+                        </div>
+                      </div>
+      
+                      <div class="col-12">
+                        <div class="d-flex justify-between border-top-light pt-10">
+                          <div class="text-15 lh-16">Address line 2</div>
+                          <div class="text-15 lh-16 fw-500 text-blue-1"></div>
+                        </div>
+                      </div>
+      
+                      <div class="col-12">
+                        <div class="d-flex justify-between border-top-light pt-10">
+                          <div class="text-15 lh-16">City</div>
+                          <div class="text-15 lh-16 fw-500 text-blue-1">New York</div>
+                        </div>
+                      </div>
+      
+                      <div class="col-12">
+                        <div class="d-flex justify-between border-top-light pt-10">
+                          <div class="text-15 lh-16">State/Province/Region</div>
+                          <div class="text-15 lh-16 fw-500 text-blue-1"></div>
+                        </div>
+                      </div>
+      
+                      <div class="col-12">
+                        <div class="d-flex justify-between border-top-light pt-10">
+                          <div class="text-15 lh-16">ZIP code/Postal code</div>
+                          <div class="text-15 lh-16 fw-500 text-blue-1"></div>
+                        </div>
+                      </div>
+      
+                      <div class="col-12">
+                        <div class="d-flex justify-between border-top-light pt-10">
+                          <div class="text-15 lh-16">Country</div>
+                          <div class="text-15 lh-16 fw-500 text-blue-1">United States</div>
+                        </div>
+                      </div>
+      
+                      <div class="col-12">
+                        <div class="d-flex justify-between border-top-light pt-10">
+                          <div class="text-15 lh-16">Special Requirements</div>
+                          <div class="text-15 lh-16 fw-500 text-blue-1"></div>
+                        </div>
+                      </div>
+      
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-md-5 mx-auto border-light rounded-8 px-50 py-40 mt-40" style="border: 1px solid lightgray;height:100%;">
+                
+                  <div class="sidebar__item  -no-border">
+                    <h5 class="text-18 fw-500 mb-10">Aeropuerto el Prat</h5>
+                    <div class="sidebar-checkbox">      
+                      <div class="row y-gap-10 items-center justify-between">                          
+                        <div class="col-auto">
+                          <div class="text-15 text-light-1">
+                            <p>Aeropuerto de Barcelona 1</p>
+                            <p>08820 El Prat de Llobregat</p>
+                            <p>Barcelona</p>
+                          <p>España</p></div>
+                        </div>
+                      </div>      
+                    </div>
+                  </div>
+      
+                    <div class="sidebar__item -no-border">
+                      <div class="cpbs-rental-date-box">
+                        <div class="fetchone">
+                          <span style="display:block;">Fecha de entrada</span>
+                          <span>19-10-2022, 7:00</span>
+                        </div>
+                        <div class="fetchtwo">
+                          <span  style="display:block;">Fecha de salida</span>
+                          <span>26-10-2022, 7:00</span>
+                        </div>
+                      </div>
+                    </div>
+      
+                    <div class="sidebar__item">
+                      <h5 class="text-18 fw-500 mb-10">Resumen</h5>
+                      <div class="sidebar-checkbox">      
+                        <div class="row y-gap-10 items-center justify-between">                          
+                          <div class="col-md-12">                      
+                            <div class="form-input ">
+                              <input type="text" required="">
+                              <label class="lh-1 text-16 text-light-1">¿TIENES UN CÓDIGO DE DESCUENTO?</label>
+                            </div>
+                          </div>
+                        </div>      
+                      </div>
+                    </div>
+      
+      
+                    <div class="sidebar__item">
+                      
+                      <div class="sidebar-checkbox">
+      
+                        <div class="row y-gap-10 items-center justify-between">
+                          <div class="col-auto">      
+                            <div class="d-flex items-center">
+                              <div class="text-15 ml-10">Plaza (7 dias)</div>
+                            </div>      
+                          </div>      
+                          <div class="col-auto">
+                            <div class="text-15 text-light-1">$92</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+      
+                    <div class="sidebar__item">                      
+                      <div class="sidebar-checkbox">      
+                        <div class="row y-gap-10 items-center justify-between">
+                          <div class="col-auto">      
+                            <div class="d-flex items-center">                         
+                                <div class="text-20 ml-10">Total</div>      
+                            </div>      
+                          </div>      
+                          <div class="col-auto">
+                            <div class="text-20 b text-black-1">$92</div>
+                          </div>
+                        </div>      
+                      </div>
+                    </div>  
+                </div>
+              </div>
+              
+              
+            </fieldset>
+        </form>
+        </div>
+        
+    </div>
+    </section>
+   
+    <section class="layout-pt md layout-pb-lg">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-30 mt-30 fw-500 mb-30 text-center">Reserva tu plaza de aparcamiento en el aeropuerto de Barcelona</div>
+                <p class="text-16  text-dark-1 text-center">
+              ¡En WeParking, nos encargamos de que la reserva sea lo más rápida y sencilla posible!
+
+              En reservas, tendrás que elegir la duración de tu estancia y todos los detalles correspondientes. Seguidamente, una vez hayas realizado el pago, recibirás un correo, por parte nuestra, de confirmación con los detalles de tu reserva. Antes de tu vuelo, recibirás un SMS con toda la información adicional, además de un teléfono de contacto para la recogida de tu vehículo en la terminal que hayas seleccionado. Es por eso, que reservar  tu plaza de aparcamiento en el aeropuerto de Barcelona nunca había sido tan cómodo.
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="text-30 mt-30 fw-500 mb-30 text-center">Consigue tu plaza de aparcamiento en el aeropuerto de Barcelona a un precio económico</div>
+                <p class="text-16  text-dark-1 text-center">Ahorra junto con WeParking tu reserva de aparcamiento en el aeropuerto de Barcelona comparado con el precio de una plaza de parking del propio aeropuerto. Reservando con nosotros, puedes ahorrarte un mínimo de 21 euros, ya que una reserva de un fin de semana en nuestros aparcamientos, te sale por un total de 22 euros, mientras que en el aparcamiento del aeropuerto de Barcelona, te sale por el mismo fin de semana por 43 euros.
+
+                  <br />¡Ahorra en tu reserva de plaza con WeParking!</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="text-30 mt-30 fw-500 mb-30 text-center">La mejor valoración en reservas de aparcamiento en el Aeropuerto de Barcelona</div>
+                <p class="text-16  text-dark-1 text-center">Ahorra junto con WeParking tu reserva de aparcamiento en el aeropuerto de Barcelona comparado con el precio de una plaza de parking del propio aeropuerto. Reservando con nosotros, puedes ahorrarte un mínimo de 21 euros, ya que una reserva de un fin de semana en nuestros aparcamientos, te sale por un total de 22 euros, mientras que en el aparcamiento del aeropuerto de Barcelona, te sale por el mismo fin de semana por 43 euros.
+
+                  <br />¡Ahorra en tu reserva de plaza con WeParking!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="layout-pt-md layout-pb-lg">
+      <div class="container">
+        <div class="row x-gap-80 y-gap-20 justify-between">
+          <div class="col-12">
+            <div class="text-30 sm:text-24 fw-600">Contact Us</div>
+          </div>
+
+          <div class="col-lg-3">
+            <div class="text-14 text-light-1">Address</div>
+            <div class="text-18 fw-500 mt-10">328 Queensberry Street, North Melbourne VIC 3051, Australia.</div>
+
+            <div class="col-auto">
+              <div class="text-14 text-light-1">Toll Free Customer Care</div>
+              <div class="text-18 fw-500 mt-10">+(1) 123 456 7890</div>
+            </div>
+
+            <div class="col-auto">
+              <div class="text-14 text-light-1">Need live support?</div>
+              <div class="text-18 fw-500 mt-10">hi@gotrip.com</div>
+            </div>
+
+
+            <div class="col-auto">
+              <div class="text-14 text-light-1">Follow us on social media</div>
+              <div class="d-flex x-gap-20 items-center mt-10">
+                <a href="#"><i class="icon-facebook text-14"></i></a>
+                <a href="#"><i class="icon-twitter text-14"></i></a>
+                <a href="#"><i class="icon-instagram text-14"></i></a>
+                <a href="#"><i class="icon-linkedin text-14"></i></a>
+              </div>
+            </div>
+
+          </div>
+
+        <div class="col-lg-8">
+          <div class="ratio ratio-16:9">
+            <div class="map-ratio">
+              <div class="map js-map-single"></div>
+            </div>
+          </div>
+        </div>
+
+          
+
+         
+
+          
+        </div>
+      </div>
+    </section>
+
+
+    <footer class="footer -type-1">
+      <div class="container">
+        <div class="pt-60 pb-60">
+          <div class="row y-gap-40 justify-between xl:justify-start">
+            <div class="col-xl-2 col-lg-4 col-sm-6">
+              <h5 class="text-16 fw-500 mb-30">Contact Us</h5>
+
+              <div class="mt-30">
+                <div class="text-14 mt-30">Toll Free Customer Care</div>
+                <a href="#" class="text-18 fw-500 text-blue-1 mt-5">+(1) 123 456 7890</a>
+              </div>
+
+              <div class="mt-35">
+                <div class="text-14 mt-30">Need live support?</div>
+                <a href="#" class="text-18 fw-500 text-blue-1 mt-5">hi@gotrip.com</a>
+              </div>
+            </div>
+
+            <div class="col-xl-2 col-lg-4 col-sm-6">
+              <h5 class="text-16 fw-500 mb-30">Company</h5>
+              <div class="d-flex y-gap-10 flex-column">
+                <a href="#">About Us</a>
+                <a href="#">Careers</a>
+                <a href="#">Blog</a>
+                <a href="#">Press</a>
+                <a href="#">Gift Cards</a>
+                <a href="#">Magazine</a>
+              </div>
+            </div>
+
+            <div class="col-xl-2 col-lg-4 col-sm-6">
+              <h5 class="text-16 fw-500 mb-30">Support</h5>
+              <div class="d-flex y-gap-10 flex-column">
+                <a href="#">Contact</a>
+                <a href="#">Legal Notice</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms and Conditions</a>
+                <a href="#">Sitemap</a>
+              </div>
+            </div>
+
+            <div class="col-xl-2 col-lg-4 col-sm-6">
+              <h5 class="text-16 fw-500 mb-30">Other Services</h5>
+              <div class="d-flex y-gap-10 flex-column">
+                <a href="#">Car hire</a>
+                <a href="#">Activity Finder</a>
+                <a href="#">Tour List</a>
+                <a href="#">Flight finder</a>
+                <a href="#">Cruise Ticket</a>
+                <a href="#">Holiday Rental</a>
+                <a href="#">Travel Agents</a>
+              </div>
+            </div>
+
+            <div class="col-xl-2 col-lg-4 col-sm-6">
+              <h5 class="text-16 fw-500 mb-30">Mobile</h5>
+
+              <div class="d-flex items-center px-20 py-10 rounded-4 border-light">
+                <div class="icon-apple text-24"></div>
+                <div class="ml-20">
+                  <div class="text-14 text-light-1">Download on the</div>
+                  <div class="text-15 lh-1 fw-500">Apple Store</div>
+                </div>
+              </div>
+
+              <div class="d-flex items-center px-20 py-10 rounded-4 border-light mt-20">
+                <div class="icon-play-market text-24"></div>
+                <div class="ml-20">
+                  <div class="text-14 text-light-1">Get in on</div>
+                  <div class="text-15 lh-1 fw-500">Google Play</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="py-20 border-top-light">
+          <div class="row justify-between items-center y-gap-10">
+            <div class="col-auto">
+              <div class="row x-gap-30 y-gap-10">
+                <div class="col-auto">
+                  <div class="d-flex items-center">
+                    © 2022 GoTrip LLC All rights reserved.
+                  </div>
+                </div>
+
+                <div class="col-auto">
+                  <div class="d-flex x-gap-15">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Site Map</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-auto">
+              <div class="row y-gap-10 items-center">
+                <div class="col-auto">
+                  <div class="d-flex items-center">
+                    <button class="d-flex items-center text-14 fw-500 text-dark-1 mr-10">
+                      <i class="icon-globe text-16 mr-10"></i>
+                      <span class="underline">English (US)</span>
+                    </button>
+
+                    <button class="d-flex items-center text-14 fw-500 text-dark-1">
+                      <i class="icon-usd text-16 mr-10"></i>
+                      <span class="underline">USD</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="col-auto">
+                  <div class="d-flex x-gap-20 items-center">
+                    <a href="#"><i class="icon-facebook text-14"></i></a>
+                    <a href="#"><i class="icon-twitter text-14"></i></a>
+                    <a href="#"><i class="icon-instagram text-14"></i></a>
+                    <a href="#"><i class="icon-linkedin text-14"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <div class="langMenu is-hidden js-langMenu" data-x="lang" data-x-toggle="is-hidden">
+    <div class="langMenu__bg" data-x-click="lang"></div>
+
+    <div class="langMenu__content bg-white rounded-4">
+      <div class="d-flex items-center justify-between px-30 py-20 sm:px-15 border-bottom-light">
+        <div class="text-20 fw-500 lh-15">Select your language</div>
+        <button class="pointer" data-x-click="lang">
+          <i class="icon-close"></i>
+        </button>
+      </div>
+
+      <div class="modalGrid px-30 py-30 sm:px-15 sm:py-15">
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">English</div>
+            <div class="text-14 lh-15 mt-5 js-title">United States</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Türkçe</div>
+            <div class="text-14 lh-15 mt-5 js-title">Turkey</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Español</div>
+            <div class="text-14 lh-15 mt-5 js-title">España</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Français</div>
+            <div class="text-14 lh-15 mt-5 js-title">France</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Italiano</div>
+            <div class="text-14 lh-15 mt-5 js-title">Italia</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">English</div>
+            <div class="text-14 lh-15 mt-5 js-title">United States</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Türkçe</div>
+            <div class="text-14 lh-15 mt-5 js-title">Turkey</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Español</div>
+            <div class="text-14 lh-15 mt-5 js-title">España</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Français</div>
+            <div class="text-14 lh-15 mt-5 js-title">France</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Italiano</div>
+            <div class="text-14 lh-15 mt-5 js-title">Italia</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">English</div>
+            <div class="text-14 lh-15 mt-5 js-title">United States</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Türkçe</div>
+            <div class="text-14 lh-15 mt-5 js-title">Turkey</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Español</div>
+            <div class="text-14 lh-15 mt-5 js-title">España</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Français</div>
+            <div class="text-14 lh-15 mt-5 js-title">France</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Italiano</div>
+            <div class="text-14 lh-15 mt-5 js-title">Italia</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">English</div>
+            <div class="text-14 lh-15 mt-5 js-title">United States</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Türkçe</div>
+            <div class="text-14 lh-15 mt-5 js-title">Turkey</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Español</div>
+            <div class="text-14 lh-15 mt-5 js-title">España</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Français</div>
+            <div class="text-14 lh-15 mt-5 js-title">France</div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Italiano</div>
+            <div class="text-14 lh-15 mt-5 js-title">Italia</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="currencyMenu is-hidden js-currencyMenu" data-x="currency" data-x-toggle="is-hidden">
+    <div class="currencyMenu__bg" data-x-click="currency"></div>
+
+    <div class="currencyMenu__content bg-white rounded-4">
+      <div class="d-flex items-center justify-between px-30 py-20 sm:px-15 border-bottom-light">
+        <div class="text-20 fw-500 lh-15">Select your currency</div>
+        <button class="pointer" data-x-click="currency">
+          <i class="icon-close"></i>
+        </button>
+      </div>
+
+      <div class="modalGrid px-30 py-30 sm:px-15 sm:py-15">
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">United States dollar</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">USD</span>
+              - $
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Australian dollar</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">AUD</span>
+              - $
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Brazilian real</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">BRL</span>
+              - R$
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Bulgarian lev</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">BGN</span>
+              - лв.
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Canadian dollar</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">CAD</span>
+              - $
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">United States dollar</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">USD</span>
+              - $
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Australian dollar</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">AUD</span>
+              - $
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Brazilian real</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">BRL</span>
+              - R$
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Bulgarian lev</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">BGN</span>
+              - лв.
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Canadian dollar</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">CAD</span>
+              - $
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">United States dollar</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">USD</span>
+              - $
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Australian dollar</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">AUD</span>
+              - $
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Brazilian real</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">BRL</span>
+              - R$
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Bulgarian lev</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">BGN</span>
+              - лв.
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Canadian dollar</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">CAD</span>
+              - $
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">United States dollar</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">USD</span>
+              - $
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Australian dollar</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">AUD</span>
+              - $
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Brazilian real</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">BRL</span>
+              - R$
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Bulgarian lev</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">BGN</span>
+              - лв.
+            </div>
+          </div>
+        </div>
+
+        <div class="modalGrid__item js-item">
+          <div class="py-10 px-15 sm:px-5 sm:py-5">
+            <div class="text-15 lh-15 fw-500 text-dark-1">Canadian dollar</div>
+            <div class="text-14 lh-15 mt-5">
+              <span class="js-title">CAD</span>
+              - $
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAz77U5XQuEME6TpftaMdX0bBelQxXRlM"></script>
+  <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+
+  <script src="js/vendors.js"></script>
+  <script src="js/main.js"></script>
+  <!-- JS -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+  <script src="vendor/jquery-validation/dist/additional-methods.min.js"></script>
+  <script src="vendor/jquery-steps/jquery.steps.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+    $('.timepicker').timepicker({
+    timeFormat: 'h:mm p',
+    interval: 60,
+    minTime: '10',
+    maxTime: '6:00pm',
+   
+    startTime: '10:00',
+    dynamic: false,
+    dropdown: true,
+    scrollbar: true
+});
+$( function() {
+    $( "#datepicker" ).datepicker({ dateFormat: 'dd-mm-yy' }).val();
+  } );
+  $( function() {
+    $( "#datepicker1" ).datepicker({ dateFormat: 'dd-mm-yy' }).val();
+  } );
+  $(document).ready(function() {
+			$('.minus').click(function () {
+				var $input = $(this).parent().find('input');
+				var count = parseInt($input.val()) - 1;
+				count = count < 1 ? 1 : count;
+				$input.val(count);
+				$input.change();
+				return false;
+			});
+			$('.plus').click(function () {
+				var $input = $(this).parent().find('input');
+				$input.val(parseInt($input.val()) + 1);
+				$input.change();
+				return false;
+			});
+		});
+    </script>
+</body>
+
+</html>
